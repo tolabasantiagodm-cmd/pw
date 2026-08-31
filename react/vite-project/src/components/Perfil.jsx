@@ -1,4 +1,3 @@
-
 export default function Perfil(props) {
     const {nombre, rol, lenguajes, apellido} = props
     return(

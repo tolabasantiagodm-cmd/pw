@@ -1,58 +1,80 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 import Perfil from './components/Perfil'
 import TarjetaPelicula from './components/TarjetaPelicula'
+import Contador from './components/Contador'
+import Acordeon from './components/Acordeon'
+import Buscador from './components/Buscador'
 
 function App() {
   const [count, setCount] = useState(0)
-  const arregloElementos = [
+
+  const peliculas = [
     {
-      name: "Baggio",
-      cc:"1lt",
-      id: 1
+      id: 1,
+      titulo: "Interstellar",
+      año: 2014,
+      vista: false
     },
     {
-      name: "Cepita",
-      cc: "500",
-      id: 2
+      id: 2,
+      titulo: "The Dark Knight",
+      año: 2008,
+      vista: true
+    },
+    {
+      id: 3,
+      titulo: "Inception",
+      año: 2010,
+      vista: false
+    },
+    {
+      id: 4,
+      titulo: "Oppenheimer",
+      año: 2023,
+      vista: true
     }
   ]
-
-//1)  
   return (
-    <> 
-      <Perfil nombre="Santiago Tolaba" rol="Desarrollador" lenguajes={["JavaScript, ", "React y ", "CSS"]} />
-      <TarjetaPelicula id="1" titulo="Interstellar" año="2014" vista="false" />
+    <>
 
-      {arregloElementos.map((item, index) => (
-        <div key ={item.idea}>
-          <p>Nombre Jugo: {item.name}</p>
-        </div>
+      <Perfil
+        nombre="Santiago Tolaba"
+        rol="Desarrollador"
+        lenguajes={["JavaScript", "React", "CSS"]}
+      />
+
+      {peliculas.map((pelicula) => (
+        <TarjetaPelicula
+          key={pelicula.id}
+          id={pelicula.id}
+          titulo={pelicula.titulo}
+          año={pelicula.año}
+          vista={pelicula.vista}
+        />
       ))}
 
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <Contador count={count} />
+
+      <button onClick={() => setCount(count + 1)}>
+        Sumar
+      </button>
+
+      <button onClick={() => setCount(Math.max(0, count - 1))}>
+        Restar
+      </button>
+
+      <button onClick={() => setCount(count == 0)}>
+        Reiniciar
+      </button>
+
+      <Acordeon
+        titulo="¿Qué es React?"
+        contenido="React es una biblioteca de JavaScript."
+      />
+
+      <Buscador/>
+
     </>
   )
 }
